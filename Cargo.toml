@@ -1,0 +1,13 @@
+[workspace]
+members = ["toml/private/tomltool"]
+resolver = "2"
+
+[workspace.package]
+version = "0.0.0-DEV"
+categories = ["development-tools"]
+homepage = "https://github.com/aspect-build/toml.bzl"
+repository = "https://github.com/aspect-build/toml.bzl"
+license = "Apache 2"
+edition = "2024"
+readme = "README.md"
+rust-version = "1.88.0"

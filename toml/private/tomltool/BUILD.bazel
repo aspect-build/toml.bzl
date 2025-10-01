@@ -1,0 +1,22 @@
+load("//bazel/rust:defs.bzl", "rust_binary")
+load("//bazel/rust:multi_platform_rust_binaries.bzl", "multi_platform_rust_binaries")
+load("//bazel/release:release.bzl", "release")
+
+rust_binary(
+    name = "tomltool",
+    srcs = ["src/main.rs"],
+    deps = [
+        "@crates//:anyhow",
+        "@crates//:clap",
+    ]
+)
+
+multi_platform_rust_binaries(
+    name = "bins",
+    target = ":tomltool",
+)
+
+release(
+    name = "release",
+    targets = [":bins"],
+)
