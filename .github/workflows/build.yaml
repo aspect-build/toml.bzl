@@ -4,11 +4,15 @@ on:
   push:
     branches: ["main"]
   pull_request:
+  
   workflow_call:
     outputs:
       linux:
         description: "Linux and MacOS binaries"
         value: ${{jobs.build.outputs.artifact}}
+      version:
+        description: "The build stamp"
+        value: ${{jobs.build.outputs.monoversion}}
 
 permissions:
   id-token: write
@@ -21,11 +25,12 @@ jobs:
     runs-on: ubuntu-24.04
     outputs:
       artifact: ${{steps.upload.outputs.artifact-url}}
+      monoversion: ${{steps.monoversion.outputs.monoversion}}
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # need to see tags (https://github.com/actions/checkout?tab=readme-ov-file#fetch-all-history-for-all-tags-and-branches)
-
+          
       - name: Setup bazelisk
         run: |
           sudo curl -fssL https://github.com/bazelbuild/bazelisk/releases/download/v1.27.0/bazelisk-linux-amd64 -o /usr/bin/bazel &&
@@ -66,8 +71,10 @@ jobs:
         run: |
           mkdir -p upload_root/assets
           DEST=$(realpath ./upload_root/assets)
+
           # Note that this is in the sub-repo
           cd tools/tomltool
+          # Note that this runs --workspace_status_command which looks at tags to get the version
           bazel run --config=release --config=ci :release -- "${DEST}"
 
       - name: Attest build provenance

@@ -14,11 +14,12 @@ permissions:
   contents: write
 
 jobs:
-  build_all:
+  build:
     uses: ./.github/workflows/build.yaml
 
   release:
-    needs: build
+    needs:
+      - build
     uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.2.2
     with:
       prerelease: false
