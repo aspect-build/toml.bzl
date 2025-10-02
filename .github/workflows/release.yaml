@@ -7,6 +7,7 @@ on:
   push:
     tags:
       - "v*.*.*"
+
 permissions:
   id-token: write
   attestations: write
@@ -24,7 +25,7 @@ jobs:
       tag_name: ${{ github.ref_name }}
       release_files: |
         artifacts-*/*
-        rules_py-*.tar.gz
+        toml.bzl-*.tar.gz
 
   publish:
     needs: release

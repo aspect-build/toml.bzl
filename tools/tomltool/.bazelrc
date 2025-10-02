@@ -8,7 +8,7 @@ common --incompatible_enable_cc_toolchain_resolution
 common:macos --@toolchains_llvm//toolchain/config:libunwind=False
 
 common:release --stamp
-common:release --workspace_status_command "${PWD}/../../bazel/workspace_status.sh"
+common:release --workspace_status_command "../../bazel/workspace_status.sh"
 common:release --compilation_mode=opt
 common:release --@rules_rust//rust/settings:lto=fat
 
