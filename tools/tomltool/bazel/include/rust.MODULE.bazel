@@ -21,7 +21,6 @@ crate.from_cargo(
     cargo_lockfile = "//:Cargo.lock",
     manifests = [
         "//:Cargo.toml",
-        "//toml/private/tomltool:Cargo.toml"
     ],
     supported_platform_triples = [
         "aarch64-apple-darwin",

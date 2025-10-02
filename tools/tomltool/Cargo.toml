@@ -1,8 +1,6 @@
-[workspace]
-members = ["toml/private/tomltool"]
-resolver = "2"
+[package]
+name = "tomltool"
 
-[workspace.package]
 version = "0.0.0-DEV"
 categories = ["development-tools"]
 homepage = "https://github.com/aspect-build/toml.bzl"
@@ -11,3 +9,15 @@ license = "Apache 2"
 edition = "2024"
 readme = "README.md"
 rust-version = "1.88.0"
+
+
+[[bin]]
+name = "tomltool"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0.100"
+clap = "4.5.48"
+serde-transcode = "1.1.1"
+serde_json = "1.0.145"
+toml = "0.9.7"

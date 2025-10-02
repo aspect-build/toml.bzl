@@ -8,6 +8,9 @@ rust_binary(
     deps = [
         "@crates//:anyhow",
         "@crates//:clap",
+        "@crates//:serde_json",
+        "@crates//:serde-transcode",
+        "@crates//:toml",
     ]
 )
 
