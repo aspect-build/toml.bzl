@@ -8,8 +8,9 @@ readonly git_commit
 # Monorepo version. For example, 2025.34.0+201b9a8.
 # Follows https://blog.aspect.build/versioning-releases-from-a-monorepo
 monorepo_version=$(
-    git describe --tags --long --match="[0-9][0-9][0-9][0-9].[0-9][0-9]" |
-        sed -e 's/-/./;s/-g/+/'
+    git tag --points-at "${git_commit}" |
+        sort -r |
+        head -n 1
 )
 
 # A short variant of the monorepo version. For example, 2025.34.0.
