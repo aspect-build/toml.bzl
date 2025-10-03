@@ -1,12 +1,24 @@
 constraint_setting(
-    name = "linker",
+    name = "libc",
     default_constraint_value = ":unknown",
     visibility = ["//visibility:public"],
 )
 
 constraint_value(
     name = "musl",
-    constraint_setting = ":linker",
+    constraint_setting = ":libc",
+    visibility = ["//visibility:public"],
+)
+
+constraint_value(
+    name = "glibc",
+    constraint_setting = ":libc",
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "gnu",
+    actual = ":glibc",
     visibility = ["//visibility:public"],
 )
 
@@ -14,6 +26,6 @@ constraint_value(
 # You shouldn't ever need to set this value manually.
 constraint_value(
     name = "unknown",
-    constraint_setting = ":linker",
+    constraint_setting = ":libc",
     visibility = ["//visibility:public"],
 )

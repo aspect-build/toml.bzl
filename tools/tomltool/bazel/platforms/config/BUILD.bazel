@@ -20,12 +20,12 @@ config_setting(
     name = "{}_{}{}".format(
         p.os,
         p.cpu,
-        "_{}".format(p.linker) if p.linker != "unknown" else "",
+        "_{}".format(p.libc) if p.libc != "unknown" else "",
     ),
     constraint_values = [
         "@platforms//os:{}".format(p.os),
         "@platforms//cpu:{}".format(p.cpu),
-        "@//bazel/platforms/linkers:{}".format(p.linker),
+        "@//bazel/platforms/libc:{}".format(p.libc),
     ],
     visibility = ["//visibility:public"],
 ) for p in platforms]

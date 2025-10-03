@@ -95,33 +95,3 @@ filegroup(
     strip_prefix = "MacOSX14.5.sdk",
     urls = ["https://github.com/alexey-lysiuk/macos-sdk/releases/download/14.5/MacOSX14.5.tar.xz"],
 )
-
-target_oses = [
-    "macos",
-    "linux",
-]
-
-target_cpus = [
-    "aarch64",
-    "x86_64",
-]
-
-platforms = [
-    {
-        "exec_os": exec_os,
-        "exec_cpu": exec_cpu,
-        "tgt_os": tgt_os,
-        "tgt_cpu": tgt_cpu,
-    }
-    for exec_os in execution_oses
-    for exec_cpu in execution_cpus
-    for tgt_os in target_oses
-    for tgt_cpu in target_cpus
-]
-
-[register_toolchains("//bazel/platforms/toolchains:{}_{}_{}_{}_llvm".format(
-    p["exec_os"],
-    p["exec_cpu"],
-    p["tgt_os"],
-    p["tgt_cpu"],
-)) for p in platforms]

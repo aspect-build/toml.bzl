@@ -6,14 +6,15 @@ def linker_suffix(delimiter, linker):
     return delimiter + linker
 
 cpus = ["aarch64", "x86_64"]
-os_to_linker = {
-    "linux": ["musl", "unknown"],
+
+os_to_libc = {
+    "linux": ["musl", "gnu"],
     "macos": ["unknown"],
 }
 
 platforms = [
-    struct(os = os, cpu = cpu, linker = linker)
-    for os in os_to_linker
-    for linker in os_to_linker[os]
+    struct(os = os, cpu = cpu, libc = libc)
+    for os in os_to_libc
+    for libc in os_to_libc[os]
     for cpu in cpus
 ]

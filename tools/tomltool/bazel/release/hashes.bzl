@@ -31,15 +31,11 @@ def _impl(ctx):
     ctx.actions.run_shell(
         outputs = [sha256out],
         inputs = [ctx.file.src],
-        command = "ROOT=$PWD && cd {dirname} && $ROOT/{sha256sum} {basename} > $ROOT/{path}".format(
-            dirname = ctx.file.src.dirname,
-            sha256sum = ctx.executable._sha256sum.path,
-            basename = ctx.file.src.basename,
-            path = sha256out.path,
-        ),
-        tools = [ctx.executable._sha256sum],
+        # HACK: On MacOS the sha256sum binary is in sbin which Bazel seems to
+        # strip from the path. So we need some logic to hit it explicitly.
+        command = "ROOT=$PWD && cd {} && (command -v sha256sum 2>&1 >/dev/null && sha256sum {src} || /sbin/sha256sum {src}) > $ROOT/{dest}".format(ctx.file.src.dirname, src=ctx.file.src.basename, dest=sha256out.path),
     )
-
+    
     # By default (if you run `bazel build` on this target, or if you use it as a
     # source of another target), only the sha256 is computed.
     return [
@@ -59,11 +55,6 @@ _hashes = rule(
         "src": attr.label(
             allow_single_file = True,
             mandatory = True,
-        ),
-        "_sha256sum": attr.label(
-            executable = True,
-            cfg = "exec",
-            default = "//bazel/release/sha256sum",
         ),
     },
 )

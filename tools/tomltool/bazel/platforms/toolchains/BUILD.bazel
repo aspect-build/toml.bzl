@@ -1,11 +1,12 @@
 load(":defs.bzl", "platforms")
 
 [toolchain(
-    name = "{}_{}_{}_{}_llvm".format(
+    name = "{}_{}_{}_{}_{}_llvm".format(
         p.exec_os,
         p.exec_cpu,
         p.tgt_os,
         p.tgt_cpu,
+        p.tgt_libc,
     ),
     exec_compatible_with = [
         "@platforms//os:{}".format(p.exec_os),
@@ -14,7 +15,7 @@ load(":defs.bzl", "platforms")
     target_compatible_with = [
         "@platforms//os:{}".format(p.tgt_os),
         "@platforms//cpu:{}".format(p.tgt_cpu),
-        "//bazel/platforms/linkers:unknown",
+        "//bazel/platforms/libc:{}".format(p.tgt_libc),
     ],
     toolchain = "@llvm_toolchain_{}_{}//:cc-clang-{}-{}".format(
         p.exec_os,
