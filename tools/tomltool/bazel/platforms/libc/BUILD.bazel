@@ -4,28 +4,36 @@ constraint_setting(
     visibility = ["//visibility:public"],
 )
 
+# Default linker for anyone not setting the linker to `musl`.
+# You shouldn't ever need to set this value manually.
+constraint_value(
+    name = "unknown",
+    constraint_setting = ":libc",
+    visibility = ["//visibility:public"],
+)
+
 constraint_value(
     name = "musl",
     constraint_setting = ":libc",
     visibility = ["//visibility:public"],
 )
 
-constraint_value(
+# It's a real PITA to wire up all the various toolchains to explicitly link
+# against glibc or libsystem, so fake it.
+alias(
     name = "glibc",
-    constraint_setting = ":libc",
+    actual = ":unknown",
     visibility = ["//visibility:public"],
 )
 
 alias(
     name = "gnu",
-    actual = ":glibc",
+    actual = ":unknown",
     visibility = ["//visibility:public"],
 )
 
-# Default linker for anyone not setting the linker to `musl`.
-# You shouldn't ever need to set this value manually.
-constraint_value(
-    name = "unknown",
-    constraint_setting = ":libc",
+alias(
+    name = "libsystem",
+    actual = ":unknown",
     visibility = ["//visibility:public"],
 )

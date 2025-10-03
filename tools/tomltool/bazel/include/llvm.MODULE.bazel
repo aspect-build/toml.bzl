@@ -21,13 +21,18 @@ execution_cpus = [
     "x86_64",
 ]
 
+os_to_libc = {
+    "macos": ["unknown"], # Really libsystem but let's not get sidetracked
+    "linux": ["gnu", "musl"],
+}
+
 [
     [
         llvm.toolchain(
             name = "llvm_toolchain_{}_{}".format(exec_os, exec_cpu),
             exec_arch = exec_cpu,
             exec_os = exec_os if exec_os != "macos" else "darwin",
-            llvm_version = "19.1.7"
+            llvm_version = "19.1.7",
         ),
         llvm.sysroot(
             name = "llvm_toolchain_{}_{}".format(exec_os, exec_cpu),
