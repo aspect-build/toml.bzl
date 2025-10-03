@@ -3,6 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: ["main"]
+
   pull_request:
   
   workflow_call:
@@ -25,7 +26,6 @@ jobs:
     runs-on: ubuntu-24.04
     outputs:
       artifact: ${{steps.upload.outputs.artifact-url}}
-      monoversion: ${{steps.monoversion.outputs.monoversion}}
     steps:
       - uses: actions/checkout@v4
         with:
