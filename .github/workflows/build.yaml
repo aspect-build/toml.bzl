@@ -30,7 +30,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0 # need to see tags (https://github.com/actions/checkout?tab=readme-ov-file#fetch-all-history-for-all-tags-and-branches)
-          
+
       - name: Setup bazelisk
         run: |
           sudo curl -fssL https://github.com/bazelbuild/bazelisk/releases/download/v1.27.0/bazelisk-linux-amd64 -o /usr/bin/bazel &&
@@ -45,8 +45,15 @@ jobs:
           # Share repository cache between workflows.
           repository-cache: true
 
+      - name: Generate monoversion as a baseline tag
+        id: monoversion
+        uses: arrdem/monoversion@2025.40.4
+        with: {}
+          
       - name: Build release artifacts
         run: |
+          git tag ${{ steps.monoversion.outputs.monoversion }}
+          
           mkdir -p upload_root/assets
           DEST=$(realpath ./upload_root/assets)
 
