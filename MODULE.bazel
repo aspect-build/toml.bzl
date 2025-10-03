@@ -12,6 +12,9 @@ bazel_dep(name = "aspect_tools_telemetry", version = "0.2.8")
 tel = use_extension("@aspect_tools_telemetry//:extension.bzl", "telemetry")
 use_repo(tel, "aspect_tools_telemetry_report")
 
+tomltool = use_extension("//toml/private:extension.bzl", "tomltool")
+use_repo(tomltool, "tomltool")
+
 bazel_dep(
     name = "bazelrc-preset.bzl",
     version = "1.2.0",
