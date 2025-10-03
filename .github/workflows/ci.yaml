@@ -25,7 +25,16 @@ jobs:
   test:
     uses: bazel-contrib/.github/.github/workflows/bazel.yaml@646899086d7aaee8e532540480f3e91e00596234 # 11 Dec 2024
     with:
-      folders: '[".", "tools/tomltool"]'
+      folders: |
+        [
+            ".",
+            "tools/tomltool"
+        ]
+      exclude: |
+        [
+            {"bzlmodEnabled": false},
+            {"os": "windows"}
+        ]
 
   pre-commit:
     runs-on: ubuntu-latest
