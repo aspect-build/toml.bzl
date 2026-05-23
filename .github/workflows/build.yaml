@@ -27,7 +27,7 @@ jobs:
     outputs:
       artifact: ${{steps.upload.outputs.artifact-url}}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0 # need to see tags (https://github.com/actions/checkout?tab=readme-ov-file#fetch-all-history-for-all-tags-and-branches)
 

@@ -39,13 +39,13 @@ jobs:
   pre-commit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: pre-commit/action@v3.0.1
 
   verify-bcr-patches:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: patch --dry-run -p1 --fuzz 0 < .bcr/patches/*.patch
 
   test-release:
@@ -56,7 +56,7 @@ jobs:
       run:
         working-directory: e2e/use_release
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - run: ./minimal_download_test.sh
       - run: bazel coverage --combined_report=lcov //src/...
       - uses: hrishikesh-kadam/setup-lcov@6c1aa0cc9e1c02f9f58f01ac599f1064ccc83470 # v1
