@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   test:
-    uses: bazel-contrib/.github/.github/workflows/bazel.yaml@646899086d7aaee8e532540480f3e91e00596234 # 11 Dec 2024
+    uses: bazel-contrib/.github/.github/workflows/bazel.yaml@2298603bd5620cc857cf83a353e48a44e74b7ea1 # v6
     with:
       exclude_windows: true
       folders: |
