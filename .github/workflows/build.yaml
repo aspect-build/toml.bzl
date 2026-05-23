@@ -36,7 +36,7 @@ jobs:
           sudo curl -fssL https://github.com/bazelbuild/bazelisk/releases/download/v1.27.0/bazelisk-linux-amd64 -o /usr/bin/bazel &&
           sudo chmod +x /usr/bin/bazel
 
-      - uses: bazel-contrib/setup-bazel@0.15.0
+      - uses: bazel-contrib/setup-bazel@4fd964a13a440a8aeb0be47350db2fc640f19ca8 # 0.15.0
         with:
           # Avoid downloading Bazel every time.
           bazelisk-cache: true
