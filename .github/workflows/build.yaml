@@ -47,7 +47,7 @@ jobs:
 
       - name: Generate monoversion as a baseline tag
         id: monoversion
-        uses: arrdem/monoversion@2025.40.7
+        uses: arrdem/monoversion@495ab47c197af7743783250905f72776c1a9bb95 # 2025.40.7
         with: {}
           
       - name: Build release artifacts
